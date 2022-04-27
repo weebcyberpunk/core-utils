@@ -42,7 +42,9 @@ int cat(FILE *in, unsigned short args) {
 
 	char c;
 	int last_newline;
+
 	if (args & NUMBER_NBLK) last_newline = 0;
+
 	for (int count = 1;;) {
 
 		c = fgetc(in);
@@ -58,13 +60,11 @@ int cat(FILE *in, unsigned short args) {
 		if ((args & NUMBER_NBLK) && (last_newline == 0) && (c == '\n')) 
 			last_newline = 1;
 
-		if ((args & NUMBER_NBLK) && (last_newline == 1)) {
+		if ((args & NUMBER_NBLK) && (last_newline == 1) && (c != '\n')) {
 			printf("\t %i ", count);
 			count++;
 
 		}
-
-		if ((args
 
 		putchar(c);
 
