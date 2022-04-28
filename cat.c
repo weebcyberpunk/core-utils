@@ -71,8 +71,6 @@ int cat(FILE *in, unsigned short args) {
 		if ((args & SHOW_ENDS) && (c == '\n'))
 			putchar('$');
 
-		putchar(c);
-
 		// squeeze blank if squeeze blank
 		if ((args & SQUEEZE_BLANK) && (last_newline) && (c == '\n'))
 			skip_char = 1;
@@ -122,6 +120,8 @@ int cat(FILE *in, unsigned short args) {
 				default: skip_char = 0;
 			}
 		}
+
+		if (!skip_char) putchar(c);
 
 	}
 
