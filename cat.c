@@ -7,11 +7,11 @@
 #define SQUEEZE_BLANK 0x8
 #define SHOW_TABS 0x10
 #define SHOW_NONPRT 0x20
-#define VERSION "0.0.0"
+#define VERSION "1.0.0"
 
 /*
  * author GG weebcyberpunk@gmail.com
- * version 0.0.0
+ * version 1.0.0
  * since Apr 24, 2022
  */
 
@@ -134,11 +134,14 @@ int main(int argv, char *argc[]) {
 			args = args | SHOW_NONPRT;
 
 		} else if (strcmp(argc[count], "--help") == 0) {
-
 			printf("Usage is similar to GNU's version distributed with CoreUtils.\n\nAll options are the same.\n");
+			runned_cat = 1; // prevent it from running with stdin
+			break;
 
 		} else if (strcmp(argc[count], "--version") == 0) {
 			printf("%s\n", VERSION);
+			runned_cat = 1; // prevent it from running with stdin
+			break;
 
 		} else if (strcmp(argc[count], "-u") == 0) {
 			continue;
