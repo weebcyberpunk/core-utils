@@ -38,7 +38,11 @@
  * }}}
  */
 
+unsigned short runned_cat = 0;
+
 int cat(FILE *in, unsigned short args) {
+
+	if (!runned_cat) runned_cat = 1;
 
 	char c;
 	unsigned short last_newline = 1;
@@ -183,6 +187,9 @@ int main(int argv, char *argc[]) {
 
 		}
 	}
+
+	if (!runned_cat)
+		cat(stdin, args);
 
 	return(errno);
 }
