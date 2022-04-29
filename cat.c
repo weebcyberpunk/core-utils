@@ -57,13 +57,13 @@ int cat(FILE *in, unsigned short args) {
 
 		// print ln if number
 		if ((args & NUMBER) && (last_newline)) {
-			printf("\t %i  ", count);
+			printf("   %i   ", count);
 			count++;
 
 		}
 
 		if ((args & NUMBER_NBLK) && (last_newline == 1) && (c != '\n')) {
-			printf("\t %i ", count);
+			printf("   %i   ", count);
 			count++;
 
 		}
