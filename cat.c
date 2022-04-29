@@ -64,6 +64,10 @@ int cat(FILE *in, unsigned short args) {
 
 		}
 
+		// squeeze blank if squeeze blank
+		if ((args & SQUEEZE_BLANK) && (last_newline) && (c == '\n'))
+			skip_char = 1;
+
 		if (c == '\n')
 			last_newline = 1;
 		else last_newline = 0;
@@ -71,10 +75,6 @@ int cat(FILE *in, unsigned short args) {
 		// print $ if show ends
 		if ((args & SHOW_ENDS) && (c == '\n'))
 			putchar('$');
-
-		// squeeze blank if squeeze blank
-		if ((args & SQUEEZE_BLANK) && (last_newline) && (c == '\n'))
-			skip_char = 1;
 
 		// show tabs if show tabs
 		if ((args & SHOW_TABS) && (c == '\t')) {
