@@ -89,40 +89,14 @@ int cat(FILE *in, unsigned short args) {
 
 		// show nonprinting if show nonprinting
 		if (args & SHOW_NONPRT) {
-			skip_char = 1;
-			switch (c) {
-				case '\0': printf("^@");
-				case 1: printf("^A");
-				case 2: printf("^B");
-				case 3: printf("^C");
-				case 4: printf("^D");
-				case 5: printf("^E");
-				case 6: printf("^F");
-				case 7: printf("^G");
-				case 8: printf("^H");
-				case 11: printf("^K");
-				case 12: printf("^L");
-				case 13: printf("^M");
-				case 14: printf("^N");
-				case 15: printf("^O");
-				case 16: printf("^P");
-				case 17: printf("^Q");
-				case 18: printf("^R");
-				case 19: printf("^S");
-				case 20: printf("^T");
-				case 21: printf("^U");
-				case 22: printf("^V");
-				case 23: printf("^W");
-				case 24: printf("^X");
-				case 25: printf("Y");
-				case 26: printf("^Z");
-				case 27: printf("^[");
-				case 28: printf("^\\");
-				case 29: printf("^]");
-				case 30: printf("^^");
-				case 31: printf("^_");
-				case 127: printf("^?");
-				default: skip_char = 0;
+			if ((c <= 8) || ((c >= 11) && (c <= 31))) {
+				skip_char = 1;
+				printf("^%c", c + 64);
+
+			} else if (c == 127) {
+				printf("^?");
+				skip_char = 1;
+
 			}
 		}
 
