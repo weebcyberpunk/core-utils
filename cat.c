@@ -58,14 +58,15 @@ int cat(FILE *in, unsigned short args) {
 
 		}
 
-		if (((args & NUMBER_NBLK) || (args & SQUEEZE_BLANK) || (args & NUMBER)) && (last_newline == 0) && (c == '\n')) 
-			last_newline = 1;
-
 		if ((args & NUMBER_NBLK) && (last_newline == 1) && (c != '\n')) {
 			printf("\t %i ", count);
 			count++;
 
 		}
+
+		if (c == '\n')
+			last_newline = 1;
+		else last_newline = 0;
 
 		// print $ if show ends
 		if ((args & SHOW_ENDS) && (c == '\n'))
