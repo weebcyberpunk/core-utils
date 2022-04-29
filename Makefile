@@ -7,4 +7,4 @@ vtest : test/vtest.c
 .PHONY : vtest-run
 
 vtest-run : cat vtest
-	./test/vtest | cat -v
+	./test/vtest | ./cat -v
