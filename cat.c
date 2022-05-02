@@ -55,8 +55,12 @@ int cat(FILE *in, unsigned short args) {
 
 		skip_char = 0;
 
+		// squeeze blank if squeeze blank
+		if ((args & SQUEEZE_BLANK) && (last_newline) && (c == '\n'))
+			skip_char = 1;
+
 		// print ln if number
-		if ((args & NUMBER) && (last_newline)) {
+		if ((args & NUMBER) && (last_newline) && !skip_char) {
 			printf("   %i   ", count);
 			count++;
 
@@ -67,10 +71,6 @@ int cat(FILE *in, unsigned short args) {
 			count++;
 
 		}
-
-		// squeeze blank if squeeze blank
-		if ((args & SQUEEZE_BLANK) && (last_newline) && (c == '\n'))
-			skip_char = 1;
 
 		if (c == '\n')
 			last_newline = 1;
