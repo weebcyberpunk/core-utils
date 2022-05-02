@@ -1,10 +1,10 @@
-cat : cat.c
+bin/cat : cat.c
 	cc cat.c -o cat
 
-vtest : test/vtest.c
-	cc test/vtest.c -o test/vtest
+cat-vtest : test/cat-vtest.c
+	cc test/cat-vtest.c -o test/cat-vtest
 
-.PHONY : vtest-run
+.PHONY : cat-vtest-run
 
-vtest-run : cat vtest
+cat-vtest-run : cat vtest
 	./test/vtest | ./cat -v
