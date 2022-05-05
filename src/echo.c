@@ -14,7 +14,39 @@ int echo(char *str, unsigned short args) {
 
 	if (!(args & INTERPRET_BACKSLASHS))
 		printf("%s", str);
-	// todo: if -e
+
+	else {
+		unsigned short interpret = 0;
+		for (int count = 0;; count++) {
+
+			if (str[count] == '\0') break;
+
+			if (interpret) {
+
+				switch (str[count]) {
+
+					case '0': putchar('\0'); break;
+					case 'a': putchar('\a'); break;
+					case 'b': putchar('\b'); break;
+					case 't': putchar('\t'); break;
+					case 'n': putchar('\n'); break;
+					case 'v': putchar('\v'); break;
+					case 'f': putchar('\f'); break;
+					case 'r': putchar('\r'); break;
+					default: printf("\\%c", str[count]);
+				}
+				
+				interpret = 0;
+				continue;
+			}
+
+			if (str[count] == '\\') interpret = 1;
+			else {
+				interpret = 0;
+				putchar(str[count]);
+			}
+		}
+	}
 
 	return(errno);
 }
