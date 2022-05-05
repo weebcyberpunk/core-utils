@@ -3,11 +3,11 @@
 #include<string.h>
 #define OUTPUT_NEWLINE 1
 #define INTERPRET_BACKSLASHS 2
-#define VERSION "0.0.0"
+#define VERSION "1.0.0"
 
 /*
  * author GG weebcyberpunk@gmail.com
- * version 0.0.0
+ * version 1.0.0
  * since May 02, 2022
  */
 int echo(char *str, unsigned short args) {
@@ -62,6 +62,10 @@ int main(int argv, char *argc[]) {
 			args = args | INTERPRET_BACKSLASHS;
 		else if (!strcmp(argc[count], "-E"))
 			args = args & ~(INTERPRET_BACKSLASHS);
+		else if (!strcmp(argc[count], "--help"))
+			printf("Usage is similar to GNU's version distributed with CoreUtils.\n\nAll options are the same.\n");
+		else if (!strcmp(argc[count], "--version"))
+			printf(VERSION);
 		else echo(argc[count], args);
 
 	}

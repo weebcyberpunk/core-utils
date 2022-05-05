@@ -1,3 +1,7 @@
+.PHONY : all cat-vtest-run echo-run
+
+all : bin/cat bin/echo
+
 bin/cat : src/cat.c
 	cc src/cat.c -o bin/cat
 
@@ -6,8 +10,6 @@ bin/echo : src/echo.c
 
 cat-vtest : test/cat-vtest.c
 	cc test/cat-vtest.c -o test/cat-vtest
-
-.PHONY : cat-vtest-run echo-run
 
 cat-vtest-run : bin/cat test/vtest
 	./test/vtest | ./bin/cat -v
