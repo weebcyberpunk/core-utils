@@ -18,7 +18,17 @@
 
 unsigned short opt;
 
-int wc(int argv, char *argc[]) {
+int wc(char *filename) {
+
+	return(errno);
+}
+
+int filesfrom(char *arg) {
+
+	return(errno);
+}
+
+int main(int argv, char *argc[]) {
 
 	// eval args
 	for (int count = 0; count < argv; count++) {
@@ -42,14 +52,34 @@ int wc(int argv, char *argc[]) {
 			opt = opt | WC_WORDS;
 
 		else if (!strcmp(argc[count], "--help"))
-			printf("Usage is similar to GNU's version.");
+			printf("Usage is similar to GNU's version.\n");
 
 		else if (!strcmp(argc[count], "--version"))
 			printf(VERSION);
 
-		else
+		else {
+			// if less text than the arg we just assume it's a file
+			unsigned long argsize = strlen(argc[count]);
+			if (argsize < 14) {
+				wc(argc[count]);
+				continue;
+			}
 
-			// TODO tests for --files0-from and files themselves
+			// see if the arg is the arg
+			unsigned short have_ff = 1;
+			for(int c = 0; c < argsize; c++) {
+				if (argc[count][c] != "files0-from="[c]) {
+					have_ff = 0;
+					break;
+				}
+			}
+
+			if (!have_ff)
+				wc(argc[count]);
+
+			else
+				filesfrom(argc[count]);
+		}
 	}
 
 	return(errno);
